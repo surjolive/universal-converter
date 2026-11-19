@@ -1,3 +1,4 @@
+import os
 import socket
 import sys
 import threading
@@ -8,6 +9,16 @@ import uvicorn
 from backend.main import app
 
 
+def detach_console():
+    if sys.platform != "win32":
+        return
+    try:
+        import ctypes
+        ctypes.windll.kernel32.FreeConsole()
+    except (AttributeError, OSError):
+        pass
+
+
 def reserve_port():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind(("127.0.0.1", 0))
@@ -15,6 +26,7 @@ def reserve_port():
 
 
 def main():
+    detach_console()
     port = reserve_port()
     server = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=port, log_level="warning"))
     server_thread = threading.Thread(target=server.run, daemon=True)
