@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef0ed">
+  <title>UNIVERSAL CONVERTER</title>
+  <link rel="icon" type="image/png" href="/images/universal_converter_favicon.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261120-8">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <img class="brand-mark" src="/images/universal_converter_favicon.png" alt="">
+      <div><strong>Universal</strong><small>CONVERTER</small></div>
+    </div>
+    <nav aria-label="Main navigation">
+      <details class="nav-group" data-nav-group="workspace" open>
+        <summary>Workspace<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="nav-submenu">
+          <button class="nav-item active" data-view="dashboard"><span class="nav-icon">01</span>Dashboard</button>
+          <button class="nav-item" data-view="converter"><span class="nav-icon">02</span>All Converters</button>
+          <button class="nav-item" data-view="batch"><span class="nav-icon">03</span>Batch Conversion</button>
+          <button class="nav-item" data-view="history"><span class="nav-icon">04</span>History</button>
+          <button class="nav-item" data-view="favorites"><span class="nav-icon">05</span>Favorites</button>
+        </div>
+      </details>
+      <details class="nav-group" data-nav-group="formats">
+        <summary>Format tools<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="nav-submenu">
+          <button class="nav-item" data-view="documents"><span class="nav-icon">06</span>Documents</button>
+          <button class="nav-item" data-view="programming"><span class="nav-icon">07</span>Programming</button>
+          <button class="nav-item" data-view="images"><span class="nav-icon">08</span>Images</button>
+          <button class="nav-item" data-view="media"><span class="nav-icon">09</span>Audio / Video</button>
+          <button class="nav-item" data-view="spreadsheets"><span class="nav-icon">10</span>Spreadsheets</button>
+          <button class="nav-item" data-view="data"><span class="nav-icon">11</span>Data</button>
+          <button class="nav-item" data-view="archives"><span class="nav-icon">12</span>Archives</button>
+          <button class="nav-item" data-view="zip"><span class="nav-icon">13</span>ZIP Converter</button>
+        </div>
+      </details>
+      <details class="nav-group" data-nav-group="system">
+        <summary>System<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="nav-submenu">
+          <button class="nav-item" data-view="host"><span class="nav-icon">14</span>Hosted Files</button>
+          <button class="nav-item" data-view="engines"><span class="nav-icon">15</span>Engines</button>
+        </div>
+      </details>
+      <details class="nav-group" data-nav-group="help">
+        <summary>Help & preferences<span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="nav-submenu">
+          <button class="nav-item" data-view="settings"><span class="nav-icon">16</span>Settings</button>
+          <button class="nav-item" data-view="about"><span class="nav-icon">17</span>About</button>
+          <button class="nav-item" data-view="support"><span class="nav-icon">18</span>Support</button>
+        </div>
+      </details>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="credit">Developed by <strong>SURJO LIVE</strong></div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <button class="icon-button menu-button" id="menuButton" title="Toggle navigation">Menu</button>
+      <div class="status"><span class="status-dot"></span><span id="engineStatus">Checking engines</span></div>
+      <div class="top-actions">
+        <button class="icon-button" id="themeButton" title="Toggle theme">Theme</button>
+        <button class="icon-button" id="settingsButton" title="Settings">Settings</button>
+      </div>
+    </header>
+
+    <section class="content" id="dashboardView">
+      <div class="page-heading">
+        <div><p class="eyebrow">Workspace overview</p><h1>Dashboard</h1></div>
+        <button class="primary-button" id="newConversion">New conversion</button>
+      </div>
+      <div class="metrics">
+        <article><span>Total conversions</span><strong id="totalCount">0</strong><small>All-time activity</small></article>
+        <article><span>Successful</span><strong id="successCount">0</strong><small>Completed outputs</small></article>
+        <article><span>Failed</span><strong id="failedCount">0</strong><small>Needs attention</small></article>
+        <article><span>Engines</span><strong id="engineCount">0</strong><small>Ready locally</small></article>
+      </div>
+      <section class="panel category-overview"><div class="panel-heading"><div><p class="eyebrow">Activity mix</p><h2>Conversion categories</h2></div><button class="text-button" id="dashboardEngines">Engine status</button></div><div id="categoryOverview" class="category-bars"></div></section>
+      <div class="dashboard-grid">
+        <section class="panel quick-panel">
+          <div class="panel-heading"><div><p class="eyebrow">Shortcuts</p><h2>Quick conversion</h2></div></div>
+          <div class="shortcut-grid">
+            <button data-shortcut="document"><strong>Document</strong><small>TXT, PDF, DOCX</small></button>
+            <button data-shortcut="image"><strong>Image</strong><small>PNG, JPG, WEBP</small></button>
+            <button data-shortcut="code"><strong>Code</strong><small>HTML, PDF, TXT</small></button>
+            <button data-shortcut="data"><strong>Data</strong><small>JSON, CSV, YAML</small></button>
+          </div>
+        </section>
+        <section class="panel activity-panel">
+          <div class="panel-heading"><div><p class="eyebrow">Latest</p><h2>Recent activity</h2></div><button class="text-button" id="viewHistory">View all</button></div>
+          <div id="recentActivity" class="activity-list"><div class="empty-state">No conversions yet</div></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="content hidden" id="converterView">
+      <div class="page-heading">
+        <div><p class="eyebrow">Conversion workspace</p><h1 id="converterTitle">All Converters</h1></div>
+        <button class="secondary-button" id="clearFiles">Clear</button>
+      </div>
+      <section id="categoryCatalog" class="category-catalog hidden"></section>
+      <div class="converter-layout">
+        <section class="panel upload-panel">
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" multiple hidden>
+            <div class="drop-visual"><span>+</span></div>
+            <h2>Drop files here</h2>
+            <p>or choose files from your computer</p>
+            <button class="primary-button" id="chooseFiles">Choose files</button>
+          </div>
+          <div id="fileList" class="file-list"></div>
+        </section>
+        <section class="panel settings-panel">
+          <div class="panel-heading"><div><p class="eyebrow">Output</p><h2>Conversion settings</h2></div></div>
+          <label>Source format<input id="sourceFormat" value="Auto-detected" disabled></label>
+          <label>Target format<select id="targetFormat"><option value="">Select output</option></select></label>
+          <button class="text-button favorite-toggle" id="favoriteToggle" type="button" title="Save this conversion as a favorite" disabled>☆ Save format pair</button>
+          <label>Quality<select id="quality"><option value="90">High - 90%</option><option value="75">Balanced - 75%</option><option value="60">Compact - 60%</option></select></label>
+          <div class="image-tools hidden" id="backgroundTools">
+            <label class="toggle-row"><input id="removeSolidBackground" type="checkbox" disabled>Remove solid-color background</label>
+            <label class="image-tolerance">Background tolerance<div class="range-control"><input id="backgroundTolerance" type="range" min="0" max="80" value="24" disabled><output id="backgroundToleranceValue">24</output></div></label>
+            <p id="backgroundHelp">Choose PNG output to preserve transparency. Best with a flat color touching the image edge.</p>
+          </div>
+          <button class="primary-button wide" id="convertButton" disabled>Start conversion</button>
+          <button class="secondary-button wide hidden" id="cancelButton">Cancel</button>
+          <div class="progress hidden" id="progress"><span id="progressBar"></span></div>
+          <p class="result-message" id="resultMessage"></p>
+        </section>
+      </div>
+      <section class="panel preview-panel hidden" id="previewPanel">
+        <div class="panel-heading"><div><p class="eyebrow">Output</p><h2>Preview</h2></div><div id="downloadActions"></div></div>
+        <div id="previewArea" class="preview-area"></div>
+      </section>
+    </section>
+
+    <section class="content hidden" id="historyView">
+      <div class="page-heading"><div><p class="eyebrow">Local database</p><h1>Conversion History</h1></div><button class="secondary-button" id="clearHistory">Clear history</button></div>
+      <section class="panel"><div class="history-toolbar"><input id="historySearch" type="search" placeholder="Search files"><select id="historyFilter"><option value="all">All statuses</option><option value="success">Successful</option><option value="failed">Failed</option></select><select id="historyCategory"><option value="all">All formats</option><option value="documents">Documents</option><option value="programming">Programming</option><option value="images">Images</option><option value="media">Audio / Video</option><option value="data">Data</option><option value="spreadsheets">Spreadsheets</option><option value="archives">Archives</option></select></div><div id="historyTable" class="history-table"></div></section>
+    </section>
+
+    <section class="content hidden" id="batchView">
+      <div class="page-heading"><div><p class="eyebrow">Queue-based processing</p><h1>Batch Conversion</h1></div><div class="batch-toolbar"><button class="secondary-button" id="clearBatch">Clear queue</button><button class="secondary-button hidden" id="stopBatch">Stop after active files</button><button class="primary-button" id="runBatch" disabled>Convert queue</button></div></div>
+      <input type="file" id="batchInput" multiple hidden>
+      <section class="panel batch-panel"><div class="batch-drop" id="batchDrop"><strong>Add files to the queue</strong><span>Files upload as needed; conversions run up to the worker limit in Settings.</span><button class="secondary-button" id="batchChoose">Choose files</button></div><div class="batch-bulk-controls"><label>Output for compatible files<select id="batchTargetAll" disabled><option value="">Add files to choose output</option></select></label><button class="secondary-button" id="applyBatchTarget" disabled>Apply to compatible</button></div><div id="batchQueue" class="batch-queue"><div class="empty-state">Queue is empty</div></div><div class="batch-progress hidden" id="batchProgress"><span id="batchProgressFill"></span></div><p id="batchMessage" class="result-message"></p></section>
+    </section>
+
+    <section class="content hidden" id="favoritesView">
+      <div class="page-heading"><div><p class="eyebrow">Saved workflows</p><h1>Favorites</h1></div><button class="secondary-button" id="clearFavorites">Clear favorites</button></div>
+      <section class="panel favorites-panel"><p class="page-intro">Save frequently used source and target format pairs from the converter. Choose one to preselect its output format.</p><div id="favoriteList" class="favorite-list"><div class="empty-state">No saved format pairs yet</div></div></section>
+    </section>
+
+    <section class="content hidden" id="enginesView">
+      <div class="page-heading"><div><p class="eyebrow">Local capability status</p><h1>Engines</h1></div><button class="secondary-button" id="refreshEngines">Refresh status</button></div>
+      <p class="engine-install-note">Optional engine installs use a fixed, reviewed Winget package list. They download software from package publishers and may require Windows approval.</p>
+      <section class="engine-summary" id="engineSummary"></section>
+      <section class="panel engine-panel"><div id="engineList" class="engine-list"><div class="empty-state">Checking installed engines...</div></div></section>
+      <section id="engineInstallPanel" class="panel engine-install-panel hidden" aria-live="polite">
+        <div class="install-panel-heading"><strong id="engineInstallTitle">Engine installation</strong><span id="engineInstallState">Queued</span></div>
+        <div class="install-progress"><span id="engineInstallProgressBar"></span></div>
+        <p id="engineInstallMessage" class="result-message">Waiting for Windows Package Manager...</p>
+        <pre id="engineInstallLog" class="install-log">No installer output yet.</pre>
+      </section>
+      <section class="panel engine-panel"><div class="panel-heading"><div><p class="eyebrow">Compatibility</p><h2>Registered conversion routes</h2></div><input id="routeSearch" type="search" placeholder="Filter routes"></div><div id="routeTable" class="route-table"></div></section>
+    </section>
+
+    <section class="content hidden" id="hostView">
+      <div class="page-heading"><div><p class="eyebrow">Static local hosting</p><h1>Hosted Files</h1></div><button class="primary-button" id="hostChooseFiles">Upload files</button></div>
+      <input type="file" id="hostFileInput" multiple hidden>
+      <section class="panel host-panel">
+        <div class="host-toolbar"><p>Host HTML, PHP source, CSS, JavaScript, images, fonts, and text files locally. PHP and scripts are never executed.</p></div>
+        <div id="hostFileList" class="host-file-list"><div class="empty-state">No hosted files</div></div>
+      </section>
+      <section class="panel preview-panel hidden" id="hostPreviewPanel"><div class="panel-heading"><div><p class="eyebrow">Sandboxed preview</p><h2 id="hostPreviewTitle">Preview</h2></div><a id="hostOpenFile" class="secondary-button" target="_blank" rel="noopener">Open</a></div><div id="hostPreviewArea" class="preview-area"></div></section>
+    </section>
+
+    <section class="content hidden" id="settingsView">
+      <div class="page-heading"><div><p class="eyebrow">Preferences</p><h1>Settings</h1></div></div>
+      <section class="panel settings-page">
+        <div class="settings-section"><h2>Appearance</h2><label>Theme<select id="themeSelect"><option value="light">Light</option><option value="dark">Dark</option></select></label><label>Accent color<select id="accentSelect"><option value="#ff8a66">Coral</option><option value="#65d6c3">Teal</option><option value="#ffc857">Gold</option><option value="#64aef5">Blue</option><option value="#a78bfa">Violet</option><option value="#d9ff4f">Lime</option></select></label></div>
+        <div class="settings-section"><h2>Uploads and processing</h2><label>Maximum upload size<select id="sizeSelect"><option value="2147483648">2 GB</option><option value="1073741824">1 GB</option><option value="524288000">500 MB</option><option value="104857600">100 MB</option></select></label><label>Worker count<select id="workerCount"><option value="1">1 worker</option><option value="2">2 workers</option><option value="4">4 workers</option><option value="8">8 workers</option></select></label></div>
+        <div class="settings-section"><h2>Security</h2><label>Local API key<input id="apiKeyInput" type="password" autocomplete="off" placeholder="Leave blank to disable"></label><label class="toggle-row"><input id="apiKeyEnabled" type="checkbox">Require API key</label></div>
+        <div class="settings-section"><h2>Storage cleanup</h2><label>Delete temporary files older than<select id="cleanupDays"><option value="1">1 day</option><option value="7">7 days</option><option value="30">30 days</option><option value="90">90 days</option></select></label><label class="toggle-row"><input id="cleanupEnabled" type="checkbox">Enable automatic cleanup policy</label><button class="secondary-button" id="runCleanup">Clean temporary files now</button></div>
+        <div class="settings-actions"><button class="primary-button" id="saveSettings">Save settings</button><button class="secondary-button" id="exportCsv">Export history CSV</button><button class="secondary-button" id="exportJson">Export history JSON</button></div>
+        <div class="settings-section"><h2>System diagnostics</h2><pre id="diagnosticsOutput" class="diagnostics-output">Run diagnostics to inspect local engines and storage.</pre><button class="secondary-button" id="runDiagnostics">Run diagnostics</button></div>
+      </section>
+    </section>
+
+    <section class="content hidden" id="aboutView">
+      <div class="page-heading"><div><p class="eyebrow">Product information</p><h1>About</h1></div></div>
+      <section class="panel about-panel">
+        <img class="about-banner" src="/images/universal_converter_logo.png" alt="">
+        <h2>UNIVERSAL CONVERTER</h2>
+        <p>UNIVERSAL CONVERTER is an offline-first multi-format file conversion platform designed to simplify document, programming, image, audio, video, and data conversion in one workspace.</p>
+        <section class="developer-profile" aria-labelledby="developerName">
+          <img class="developer-avatar" src="/images/surjo_live_github_avatar.jpg" alt="Surjo Live GitHub profile photo" width="72" height="72" loading="lazy">
+          <div class="developer-copy">
+            <p class="eyebrow">Developer profile</p>
+            <h3 id="developerName">Surjo Live <span>@surjolive</span></h3>
+            <p>Developer and gaming content creator. Current open-source work includes LIZARD, a Rust-based programming language project, and tools focused on automation and developer workflows.</p>
+          </div>
+          <nav class="developer-links" aria-label="Developer links">
+            <a href="https://github.com/surjolive" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+            <a href="https://github.com/surjolive/LIZARD" target="_blank" rel="noopener noreferrer">Featured project: LIZARD</a>
+            <a href="https://www.youtube.com/@issurjolive" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="mailto:surjolivemailbox@gmail.com">Email Surjo Live</a>
+          </nav>
+        </section>
+        <div class="about-details">
+          <article><h3>Local by default</h3><p>Uploads, conversions, history, and hosted assets stay in local application storage.</p></article>
+          <article><h3>Transparent capabilities</h3><p>Conversion options come from registered local routes. Optional tools are shown as missing until detected.</p></article>
+          <article><h3>Execution safeguards</h3><p>Uploaded PHP and scripts are treated as source files and are never run by the converter.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="content hidden" id="supportView">
+      <div class="page-heading"><div><p class="eyebrow">Help desk</p><h1>Support</h1></div></div>
+      <div class="support-grid">
+        <section class="panel support-contact">
+          <p class="eyebrow">Contact</p>
+          <h2>Need a hand?</h2>
+          <p>Include the source format, target format, and the exact error message. Avoid sending private files or sensitive documents.</p>
+          <p class="support-address"><a href="mailto:surjolivemailbox@gmail.com?subject=Universal%20Converter%20support">surjolivemailbox@gmail.com</a><button class="secondary-button" id="copySupportEmail" type="button">Copy address</button></p>
+          <div class="support-links">
+            <a class="primary-button" href="mailto:surjolivemailbox@gmail.com?subject=Universal%20Converter%20support">Email support</a>
+            <a class="secondary-button" href="https://github.com/surjolive" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+          </div>
+          <button class="text-button" id="supportEngines" type="button">Check local engine status</button>
+        </section>
+        <section class="panel support-faq">
+          <p class="eyebrow">Troubleshooting</p>
+          <details><summary>Why does the detected format differ from the filename?</summary><p>The converter checks file signatures as well as extensions. A file named .php that begins with a PDF signature is treated as a PDF.</p></details>
+          <details><summary>Why is an output format missing?</summary><p>Only registered routes are offered for the detected source. Some routes also need optional tools; check the Engines page for their status.</p></details>
+          <details><summary>Where are my files processed?</summary><p>Uploads and conversions are processed by this local application. Generated files and history remain in its local storage.</p></details>
+          <details><summary>How does image background removal work?</summary><p>It makes flat-color regions connected to the image edge transparent. Choose PNG output; it is not intended for complex backgrounds.</p></details>
+        </section>
+      </div>
+    </section>
+  </main>
+  <div class="toast" id="toast"></div>
+  <script src="/assets/app.js?v=20261120-17"></script>
+</body>
+</html>

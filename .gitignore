@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+*.db
+/storage/
+/database/
+/build/
+/dist/
+*.spec
+/config/settings.json
+/scripts/pdfdw (1).pdf
+.env
+.env.*
+!.env.example
+logs/
+*.log
