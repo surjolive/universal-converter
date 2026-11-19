@@ -1,8 +1,21 @@
 # UNIVERSAL CONVERTER
 
+[![Windows tests](https://github.com/surjolive/universal-converter/actions/workflows/tests.yml/badge.svg)](https://github.com/surjolive/universal-converter/actions/workflows/tests.yml)
+[![Latest release](https://img.shields.io/github/v/release/surjolive/universal-converter)](https://github.com/surjolive/universal-converter/releases/latest)
+
 Offline-first local file conversion application.
 
 **Developed by SURJO LIVE**
+
+## Screenshots
+
+### Dashboard
+
+![UNIVERSAL CONVERTER dashboard](docs/screenshots/dashboard.png)
+
+### Conversion workspace
+
+![UNIVERSAL CONVERTER conversion workspace](docs/screenshots/converter.png)
 
 ## Requirements
 
@@ -49,3 +62,11 @@ Open `http://127.0.0.1:8765/api/docs` for interactive local API documentation.
 ## Security
 
 The application binds to loopback by default. Uploaded PHP and Python source is never executed automatically. Runtime settings, local databases, uploads, generated conversions, and build outputs are excluded from the public repository.
+
+## Support and Contributions
+
+For help, email [surjolivemailbox@gmail.com](mailto:surjolivemailbox@gmail.com). See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request and [SECURITY.md](SECURITY.md) for private vulnerability reports.
+
+## License
+
+No license has been selected yet. Until a license is added, the source is public for viewing but reuse and redistribution are not granted.

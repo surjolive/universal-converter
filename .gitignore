@@ -11,7 +11,6 @@ venv/
 /dist/
 *.spec
 /config/settings.json
-/scripts/pdfdw (1).pdf
 .env
 .env.*
 !.env.example
