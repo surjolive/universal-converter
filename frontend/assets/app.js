@@ -584,16 +584,26 @@ document.getElementById("themeButton").addEventListener("click", () => {
   const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   localStorage.setItem("uc-theme", next); applyPreferences();
 });
+function closeSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.remove("open");
+  if (!document.body.classList.contains("sidebar-collapsed")) {
+    document.body.classList.add("sidebar-collapsed");
+    localStorage.setItem("uc-sidebar-hidden", "true");
+    document.getElementById("sidebarHidden").checked = true;
+  }
+}
+
 document.getElementById("menuButton").addEventListener("click", () => {
   const sidebar = document.getElementById("sidebar");
   if (document.body.classList.contains("sidebar-collapsed")) {
     sidebar.classList.toggle("open");
   } else {
-    document.body.classList.add("sidebar-collapsed");
-    localStorage.setItem("uc-sidebar-hidden", "true");
-    document.getElementById("sidebarHidden").checked = true;
+    closeSidebar();
   }
 });
+document.getElementById("sidebarCloseButton").addEventListener("click", closeSidebar);
+document.getElementById("sidebarScrim").addEventListener("click", closeSidebar);
 document.getElementById("sidebarHidden").addEventListener("change", event => {
   localStorage.setItem("uc-sidebar-hidden", String(event.target.checked));
   applySidebarPreference();
@@ -700,7 +710,7 @@ batchDrop.addEventListener("drop", event => addBatchFiles(event.dataTransfer.fil
 document.addEventListener("keydown", event => {
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "o") { event.preventDefault(); showView("converter"); document.getElementById("fileInput").click(); }
   if ((event.ctrlKey || event.metaKey) && event.key === "Enter" && !document.getElementById("converterView").classList.contains("hidden")) { event.preventDefault(); convert(); }
-  if (event.key === "Escape") document.getElementById("sidebar").classList.remove("open");
+  if (event.key === "Escape") closeSidebar();
 });
 document.getElementById("historyTable").addEventListener("click", async event => {
   const download = event.target.closest("[data-history-download]");
