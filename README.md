@@ -1,5 +1,9 @@
 # UNIVERSAL CONVERTER
 
+<p align="center">
+	<img src="images/universal_converter_logo.png" alt="UNIVERSAL CONVERTER cover banner" width="100%">
+</p>
+
 [![Windows tests](https://github.com/surjolive/universal-converter/actions/workflows/tests.yml/badge.svg)](https://github.com/surjolive/universal-converter/actions/workflows/tests.yml)
 [![Latest release](https://img.shields.io/github/v/release/surjolive/universal-converter)](https://github.com/surjolive/universal-converter/releases/latest)
 
