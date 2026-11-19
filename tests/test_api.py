@@ -3,6 +3,7 @@ from pathlib import Path
 import zipfile
 from PIL import Image, ImageDraw
 from fastapi.testclient import TestClient
+from reportlab.pdfgen import canvas
 
 import backend.main as backend_main
 from backend.engines import archive_engine
@@ -225,9 +226,11 @@ def test_json_to_yaml_conversion():
 
 
 def test_mislabeled_php_pdf_converts_to_html_and_pdf():
-    source = Path("scripts/pdfdw (1).pdf")
-    assert source.exists()
-    response = client.post("/api/upload", files={"files": (source.name, source.read_bytes(), "application/octet-stream")})
+    source = BytesIO()
+    document = canvas.Canvas(source)
+    document.drawString(72, 720, "Generated PDF fixture")
+    document.save()
+    response = client.post("/api/upload", files={"files": ("sample.php", source.getvalue(), "application/octet-stream")})
     assert response.status_code == 200
     upload = response.json()["files"][0]
     assert upload["extension"] == "pdf"
