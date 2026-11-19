@@ -1,0 +1,48 @@
+{
+  "name": "@surjolive/universal-converter",
+  "version": "1.0.1",
+  "description": "Offline-first local file conversion application for Windows",
+  "license": "MIT",
+  "author": "SURJO LIVE",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surjolive/universal-converter.git"
+  },
+  "homepage": "https://github.com/surjolive/universal-converter",
+  "bugs": {
+    "url": "https://github.com/surjolive/universal-converter/issues"
+  },
+  "bin": {
+    "universal-converter": "bin/universal-converter.js"
+  },
+  "scripts": {
+    "postinstall": "node scripts/npm-install.js",
+    "start": "node bin/universal-converter.js",
+    "test": "python -m pytest -q"
+  },
+  "keywords": [
+    "converter",
+    "pdf",
+    "image",
+    "video",
+    "archive",
+    "spreadsheet",
+    "offline"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "os": [
+    "win32"
+  ],
+  "files": [
+    "backend",
+    "frontend",
+    "images",
+    "bin",
+    "scripts/npm-install.js",
+    "requirements.txt",
+    "README.md",
+    "LICENSE"
+  ]
+}

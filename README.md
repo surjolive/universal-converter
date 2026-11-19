@@ -36,6 +36,72 @@ Download `Universal-Converter-Setup.exe` from [GitHub Releases](https://github.c
 
 The installer stores settings, uploads, conversion history, and hosted files under `%LOCALAPPDATA%\Universal Converter`. Optional tools such as FFmpeg and LibreOffice are not bundled; install them separately to enable their conversion routes.
 
+## Packages
+
+Universal Converter is available as an npm package for Windows with Python 3.12 or newer and Node.js 18 or newer.
+
+### GitHub Packages
+
+GitHub Packages requires authentication for npm registry access:
+
+```cmd
+echo @surjolive:registry=https://npm.pkg.github.com > %USERPROFILE%\.npmrc
+echo //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN >> %USERPROFILE%\.npmrc
+npm install --global @surjolive/universal-converter
+```
+
+Use a GitHub personal access token with `read:packages` permission. Replace `YOUR_GITHUB_TOKEN` with the token itself.
+
+### Command Prompt (CMD)
+
+Install it globally:
+
+```cmd
+npm install --global @surjolive/universal-converter
+```
+
+Start the application:
+
+```cmd
+universal-converter
+```
+
+Open `http://127.0.0.1:8765` in a browser. Press `Ctrl+C` in the terminal to stop the server.
+
+### PowerShell
+
+Install and start it from PowerShell:
+
+```powershell
+npm install --global @surjolive/universal-converter
+universal-converter
+```
+
+### Run Without a Global Install
+
+```powershell
+npx --yes @surjolive/universal-converter
+```
+
+### Update
+
+```cmd
+npm update --global @surjolive/universal-converter
+```
+
+### Uninstall
+
+```cmd
+npm uninstall --global @surjolive/universal-converter
+```
+
+### Package Requirements
+
+- Windows 10 or 11
+- Node.js 18 or newer
+- Python 3.12 or newer
+- Optional FFmpeg, LibreOffice, PHP, WinRAR, and other tools for their conversion routes
+
 ## Run from Source
 
 Requirements: Windows 10/11 and Python 3.12 or newer.
