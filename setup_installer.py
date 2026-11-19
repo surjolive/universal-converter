@@ -35,10 +35,11 @@ def create_shortcut(shortcut_path, executable):
         f"$shortcut.TargetPath = {powershell_literal(executable)}; "
         f"$shortcut.WorkingDirectory = {powershell_literal(executable.parent)}; "
         f"$shortcut.IconLocation = {powershell_literal(str(executable) + ',0')}; "
+        "$shortcut.WindowStyle = 1; "
         "$shortcut.Save()"
     )
     subprocess.run(
-        ["powershell.exe", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-Command", script],
+        ["powershell.exe", "-NoProfile", "-WindowStyle", "Hidden", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-Command", script],
         check=True,
         capture_output=True,
         text=True,
@@ -187,7 +188,7 @@ class SetupWizard:
                         "[Environment]::GetFolderPath([Environment+SpecialFolder]::DesktopDirectory)"
                     )
                     desktop_result = subprocess.run(
-                        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", desktop_script],
+                        ["powershell.exe", "-NoProfile", "-WindowStyle", "Hidden", "-NonInteractive", "-Command", desktop_script],
                         check=True,
                         capture_output=True,
                         text=True,
@@ -271,7 +272,7 @@ def silent_install():
 
     desktop_script = "[Environment]::GetFolderPath([Environment+SpecialFolder]::DesktopDirectory)"
     desktop_result = subprocess.run(
-        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", desktop_script],
+        ["powershell.exe", "-NoProfile", "-WindowStyle", "Hidden", "-NonInteractive", "-Command", desktop_script],
         check=True,
         capture_output=True,
         text=True,
