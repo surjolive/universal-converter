@@ -22,7 +22,7 @@ function showView(name) {
     localStorage.setItem("uc-last-view", name);
   }
   document.querySelectorAll(".content").forEach(section => section.classList.add("hidden"));
-  if (window.matchMedia("(max-width: 900px)").matches) document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("sidebar").classList.remove("open");
   const map = { dashboard: "dashboardView", converter: "converterView", zip: "converterView", history: "historyView", host: "hostView", batch: "batchView", favorites: "favoritesView", engines: "enginesView", settings: "settingsView", about: "aboutView", support: "supportView" };
   document.getElementById(map[name] || "converterView").classList.remove("hidden");
   document.querySelectorAll(".nav-item").forEach(button => button.classList.toggle("active", button.dataset.view === name));
@@ -564,6 +564,13 @@ function applyNavigationPreferences() {
   });
 }
 
+function applySidebarPreference() {
+  const hidden = localStorage.getItem("uc-sidebar-hidden") === "true";
+  document.body.classList.toggle("sidebar-collapsed", hidden);
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("sidebarHidden").checked = hidden;
+}
+
 for (const button of document.querySelectorAll(".nav-item[data-view]")) {
   button.addEventListener("click", () => showView(button.dataset.view));
 }
@@ -577,7 +584,20 @@ document.getElementById("themeButton").addEventListener("click", () => {
   const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   localStorage.setItem("uc-theme", next); applyPreferences();
 });
-document.getElementById("menuButton").addEventListener("click", () => document.getElementById("sidebar").classList.toggle("open"));
+document.getElementById("menuButton").addEventListener("click", () => {
+  const sidebar = document.getElementById("sidebar");
+  if (document.body.classList.contains("sidebar-collapsed")) {
+    sidebar.classList.toggle("open");
+  } else {
+    document.body.classList.add("sidebar-collapsed");
+    localStorage.setItem("uc-sidebar-hidden", "true");
+    document.getElementById("sidebarHidden").checked = true;
+  }
+});
+document.getElementById("sidebarHidden").addEventListener("change", event => {
+  localStorage.setItem("uc-sidebar-hidden", String(event.target.checked));
+  applySidebarPreference();
+});
 document.getElementById("chooseFiles").addEventListener("click", () => document.getElementById("fileInput").click());
 document.getElementById("fileInput").addEventListener("change", event => handleFiles(event.target.files));
 document.getElementById("convertButton").addEventListener("click", convert);
@@ -794,6 +814,7 @@ document.getElementById("exportJson").addEventListener("click", () => exportHist
 
 applyPreferences();
 applyNavigationPreferences();
+applySidebarPreference();
 const lastView = localStorage.getItem("uc-last-view");
 if (lastView && [...document.querySelectorAll(".nav-item[data-view]")].some(button => button.dataset.view === lastView)) showView(lastView);
 loadSettings();
