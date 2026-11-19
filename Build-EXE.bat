@@ -13,11 +13,11 @@ echo Installing build dependencies...
 if errorlevel 1 goto failed
 
 echo Building the desktop application...
-"%PYTHON%" -m PyInstaller --noconfirm --clean --onedir --windowed --name "UniversalConverter" --add-data "%CD%\frontend;frontend" --add-data "%CD%\images;images" --collect-all webview --collect-all uvicorn --collect-all fastapi --collect-all sqlalchemy --collect-all PIL --collect-all reportlab --collect-all fitz --collect-all docx --collect-all openpyxl --collect-all cairosvg --collect-all yaml --workpath "build\pyinstaller-app" --specpath "build\spec-app" --distpath "dist" scripts\desktop.py
+"%PYTHON%" -m PyInstaller --noconfirm --clean --onedir --windowed --icon "%CD%\images\universal_converter.ico" --name "UniversalConverter" --add-data "%CD%\frontend;frontend" --add-data "%CD%\images;images" --collect-all webview --collect-all uvicorn --collect-all fastapi --collect-all sqlalchemy --collect-all PIL --collect-all reportlab --collect-all fitz --collect-all docx --collect-all openpyxl --collect-all cairosvg --collect-all yaml --workpath "build\pyinstaller-app" --specpath "build\spec-app" --distpath "dist" scripts\desktop.py
 if errorlevel 1 goto failed
 
 echo Building the setup wizard...
-"%PYTHON%" -m PyInstaller --noconfirm --clean --onefile --windowed --name "Universal-Converter-Setup" --add-data "%CD%\dist\UniversalConverter;app" --workpath "build\pyinstaller-setup" --specpath "build\spec-setup" --distpath "dist" setup_installer.py
+"%PYTHON%" -m PyInstaller --noconfirm --clean --onefile --windowed --icon "%CD%\images\universal_converter.ico" --name "Universal-Converter-Setup" --add-data "%CD%\dist\UniversalConverter;app" --add-data "%CD%\images\universal_converter.ico;images" --workpath "build\pyinstaller-setup" --specpath "build\spec-setup" --distpath "dist" setup_installer.py
 if errorlevel 1 goto failed
 
 echo.
