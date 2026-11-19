@@ -83,10 +83,13 @@ class SetupWizard:
         self.root.geometry("560x430")
         self.root.minsize(520, 400)
         self.root.configure(bg="#f1f5f2")
+        try:
+            self.root.iconbitmap(bundle_root() / "images" / "universal_converter.ico")
+        except tk.TclError:
+            pass
         self.root.protocol("WM_DELETE_WINDOW", self.close)
 
         self.install_path = tk.StringVar(value=str(DEFAULT_INSTALL_DIR))
-        self.create_desktop_shortcut = tk.BooleanVar(value=True)
         self.launch_after_install = tk.BooleanVar(value=True)
         self.status = tk.StringVar(value="Choose where to install the application.")
         self.events = queue.Queue()
@@ -106,7 +109,7 @@ class SetupWizard:
         ttk.Entry(path_row, textvariable=self.install_path).pack(side="left", fill="x", expand=True)
         ttk.Button(path_row, text="Browse", command=self.browse).pack(side="left", padx=(8, 0))
 
-        ttk.Checkbutton(body, text="Create a desktop shortcut", variable=self.create_desktop_shortcut).pack(anchor="w", pady=2)
+        ttk.Label(body, text="Desktop shortcut: Enabled", foreground="#66766d").pack(anchor="w", pady=2)
         ttk.Checkbutton(body, text="Launch Universal Converter after installation", variable=self.launch_after_install).pack(anchor="w", pady=2)
         ttk.Label(body, text="Uploads and settings are kept separately in your Local AppData.", foreground="#66766d").pack(anchor="w", pady=(4, 12))
 
@@ -149,7 +152,7 @@ class SetupWizard:
             if not messagebox.askyesno("Use existing folder?", "Files in this folder may be replaced. Continue?"):
                 return
 
-        options = (self.create_desktop_shortcut.get(), self.launch_after_install.get())
+        options = (True, self.launch_after_install.get())
         self.installing = True
         self.install_button.configure(state="disabled")
         self.progress.configure(value=0)
@@ -180,7 +183,16 @@ class SetupWizard:
             try:
                 create_shortcut(start_menu / "Universal Converter.lnk", executable)
                 if options[0]:
-                    desktop = Path(os.environ.get("USERPROFILE", Path.home())) / "Desktop"
+                    desktop_script = (
+                        "[Environment]::GetFolderPath([Environment+SpecialFolder]::DesktopDirectory)"
+                    )
+                    desktop_result = subprocess.run(
+                        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", desktop_script],
+                        check=True,
+                        capture_output=True,
+                        text=True,
+                    )
+                    desktop = Path(desktop_result.stdout.strip())
                     create_shortcut(desktop / "Universal Converter.lnk", executable)
             except Exception as error:
                 warnings.append(f"Shortcut creation was skipped: {error}")
@@ -236,5 +248,44 @@ class SetupWizard:
         self.root.mainloop()
 
 
+def silent_install():
+    source = bundle_root() / "app"
+    target = DEFAULT_INSTALL_DIR
+    if not source.is_dir():
+        raise RuntimeError("The application files could not be found inside this installer.")
+
+    target.mkdir(parents=True, exist_ok=True)
+    for source_file in source.rglob("*"):
+        if not source_file.is_file():
+            continue
+        destination = target / source_file.relative_to(source)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source_file, destination)
+
+    executable = target / APP_EXECUTABLE
+    write_uninstaller(target)
+    register_uninstaller(target, executable)
+
+    start_menu = Path(os.environ.get("APPDATA", LOCAL_APP_DATA)) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Universal Converter"
+    create_shortcut(start_menu / "Universal Converter.lnk", executable)
+
+    desktop_script = "[Environment]::GetFolderPath([Environment+SpecialFolder]::DesktopDirectory)"
+    desktop_result = subprocess.run(
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", desktop_script],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    desktop = Path(desktop_result.stdout.strip())
+    create_shortcut(desktop / "Universal Converter.lnk", executable)
+
+
 if __name__ == "__main__":
-    SetupWizard().run()
+    if "/silent" in sys.argv:
+        try:
+            silent_install()
+        except Exception as error:
+            print(error, file=sys.stderr)
+            raise SystemExit(1)
+    else:
+        SetupWizard().run()
