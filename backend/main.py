@@ -24,7 +24,7 @@ from .security import safe_filename, validate_mime_and_signature
 from .engines.registry import ConverterRegistry
 from .engines import image_engine, data_engine, pdf_engine, archive_engine, video_engine, spreadsheet_engine, code_engine
 
-app = FastAPI(title="UNIVERSAL CONVERTER", version="1.0.0", docs_url="/api/docs")
+app = FastAPI(title="Universal Converter", version="1.0.0", docs_url="/api/docs")
 app.add_middleware(CORSMiddleware, allow_origins=["http://127.0.0.1:8765", "http://localhost:8765"], allow_methods=["*"], allow_headers=["*"])
 registry = ConverterRegistry()
 INSTALL_JOBS = {}
@@ -219,7 +219,7 @@ def settings_diagnostics():
     disk = shutil.disk_usage(str(ROOT))
     database_path = app_config.DATABASE / "converter.db"
     return {
-        "product": "UNIVERSAL CONVERTER",
+        "product": "Universal Converter",
         "python": f"{__import__('sys').version.split()[0]}",
         "ffmpeg": "available" if shutil.which("ffmpeg") else "missing",
         "php": "available" if shutil.which("php") else "missing",
@@ -232,7 +232,7 @@ def settings_diagnostics():
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "offline": True, "product": "UNIVERSAL CONVERTER"}
+    return {"status": "ok", "offline": True, "product": "Universal Converter"}
 
 @app.get("/api/engines")
 def engines():

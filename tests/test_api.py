@@ -16,7 +16,7 @@ client = TestClient(app)
 def test_health():
     response = client.get("/api/health")
     assert response.status_code == 200
-    assert response.json()["product"] == "UNIVERSAL CONVERTER"
+    assert response.json()["product"] == "Universal Converter"
 
 
 def test_formats():
@@ -263,7 +263,7 @@ def test_advanced_settings_cleanup_diagnostics_and_export():
 
     diagnostics = client.get("/api/settings/diagnostics")
     assert diagnostics.status_code == 200
-    assert diagnostics.json()["product"] == "UNIVERSAL CONVERTER"
+    assert diagnostics.json()["product"] == "Universal Converter"
 
     cleanup = client.post("/api/settings/cleanup")
     assert cleanup.status_code == 200

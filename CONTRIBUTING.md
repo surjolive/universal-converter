@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve UNIVERSAL CONVERTER.
+Thanks for helping improve Universal Converter.
 
 ## Development setup
 

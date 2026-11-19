@@ -293,7 +293,7 @@ async function installEngine(key, name, packageId, button) {
     if (engine?.status === "available") {
       document.getElementById("engineInstallMessage").textContent = `${name} is installed and detected.`;
     } else if (result.status === "succeeded") {
-      document.getElementById("engineInstallMessage").textContent = `${name} installed. Restart UNIVERSAL CONVERTER if its executable is not yet visible.`;
+      document.getElementById("engineInstallMessage").textContent = `${name} installed. Restart Universal Converter if its executable is not yet visible.`;
     }
   } catch (error) {
     renderInstallJob(name, { status: "failed", message: error.message, logs: [] });

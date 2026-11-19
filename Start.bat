@@ -2,8 +2,8 @@
 setlocal
 cd /d "%~dp0"
 if exist ".venv\Scripts\python.exe" (
-  start "UNIVERSAL CONVERTER" ".venv\Scripts\python.exe" -m backend.main
+  start "Universal Converter" ".venv\Scripts\python.exe" -m backend.main
 ) else (
-  start "UNIVERSAL CONVERTER" python -m backend.main
+  start "Universal Converter" python -m backend.main
 )
 start "" "http://127.0.0.1:8765"
