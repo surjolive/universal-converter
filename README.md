@@ -69,4 +69,4 @@ For help, email [surjolivemailbox@gmail.com](mailto:surjolivemailbox@gmail.com).
 
 ## License
 
-No license has been selected yet. Until a license is added, the source is public for viewing but reuse and redistribution are not granted.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
