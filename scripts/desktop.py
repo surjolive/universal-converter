@@ -25,11 +25,11 @@ def main():
     if not server.started:
         server.should_exit = True
         from tkinter import messagebox
-        messagebox.showerror("UNIVERSAL CONVERTER", "The local conversion service could not start.")
+        messagebox.showerror("Universal Converter", "The local conversion service could not start.")
         return
     try:
         webview.create_window(
-            "UNIVERSAL CONVERTER",
+            "Universal Converter",
             f"http://127.0.0.1:{port}",
             width=1280,
             height=800,

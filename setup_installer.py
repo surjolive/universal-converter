@@ -10,7 +10,7 @@ from tkinter import filedialog, messagebox, ttk
 import winreg
 
 
-APP_NAME = "UNIVERSAL CONVERTER"
+APP_NAME = "Universal Converter"
 APP_EXECUTABLE = "UniversalConverter.exe"
 UNINSTALL_KEY = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\UniversalConverter"
 LOCAL_APP_DATA = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local"))
@@ -107,7 +107,7 @@ class SetupWizard:
         ttk.Button(path_row, text="Browse", command=self.browse).pack(side="left", padx=(8, 0))
 
         ttk.Checkbutton(body, text="Create a desktop shortcut", variable=self.create_desktop_shortcut).pack(anchor="w", pady=2)
-        ttk.Checkbutton(body, text="Launch UNIVERSAL CONVERTER after installation", variable=self.launch_after_install).pack(anchor="w", pady=2)
+        ttk.Checkbutton(body, text="Launch Universal Converter after installation", variable=self.launch_after_install).pack(anchor="w", pady=2)
         ttk.Label(body, text="Uploads and settings are kept separately in your Local AppData.", foreground="#66766d").pack(anchor="w", pady=(4, 12))
 
         self.progress = ttk.Progressbar(body, mode="determinate", maximum=100, style="Install.Horizontal.TProgressbar")

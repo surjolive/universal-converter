@@ -1,7 +1,7 @@
-# UNIVERSAL CONVERTER
+# Universal Converter
 
 <p align="center">
-	<img src="images/universal_converter_logo.png" alt="UNIVERSAL CONVERTER cover banner" width="100%">
+	<img src="images/universal_converter_logo.png" alt="Universal Converter cover banner" width="100%">
 </p>
 
 [![Windows tests](https://github.com/surjolive/universal-converter/actions/workflows/tests.yml/badge.svg)](https://github.com/surjolive/universal-converter/actions/workflows/tests.yml)
@@ -15,11 +15,11 @@ Offline-first local file conversion application.
 
 ### Dashboard
 
-![UNIVERSAL CONVERTER dashboard](docs/screenshots/dashboard.png)
+![Universal Converter dashboard](docs/screenshots/dashboard.png)
 
 ### Conversion workspace
 
-![UNIVERSAL CONVERTER conversion workspace](docs/screenshots/converter.png)
+![Universal Converter conversion workspace](docs/screenshots/converter.png)
 
 ## Requirements
 
